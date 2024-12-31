@@ -6,6 +6,7 @@ import com.Aditya.CrudApi.Repository.StudentEntryRepository;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
@@ -43,9 +44,10 @@ public class StudentEntityService {
 
     }
 
+    @Transactional
     public void deletebyid(String id,String UserName)
     {
-        User user = userEntityService.Findbyname(UserName);
+        User user = userEntityService.Findbyname(UserName );
 
         // Remove the specific student ID from the user's studentEnteriesx
         boolean removed = user.getStudentEnteriesx().removeIf(studentId -> studentId.equals(id));
